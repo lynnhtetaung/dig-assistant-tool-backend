@@ -32,4 +32,5 @@ Route::group([
     Route::delete('/delete/{id}', 'DockerManageController@delete')->name('.delete');
     Route::get('/application/{id}/{name}/image_status/{status}', 'DockerManageController@changeStatus')->name('.image-status');
     Route::get('/shell-script/{name}', 'DockerManageController@run')->name('.shell-script');
+    Route::post('/non-user/create', 'DockerManageController@createNonUser')->name('.non-user-create');
 });

@@ -67,6 +67,23 @@ class DockerManageController extends BaseController
     }
 
     /**
+     * createNonUser
+     */
+    public function createNonUser()
+    {
+        try {
+            $data = $this->validateNonUserDocker();
+            Log::debug('Validated -> createNonUser'. print_r($data, true));
+            $response = $this->helper->createNonUserDockerFile($data);
+        } catch (Exception $e) {
+            $response = ExceptionService::getResponse($e);
+            Log::debug('Coming -> Docker createNonUser error'. print_r($response, true));
+
+        }
+        return response()->json($response, $response['status']);
+    }
+
+    /**
      * Update
      */
     public function update($id)
@@ -169,6 +186,49 @@ class DockerManageController extends BaseController
             'os_type' => $request->input('os_type'),
             'programming' => $request->input('programming'),
             'instructions' => $request->input('instructions')
+        ];
+
+        return $data;
+    }
+
+    /**
+     * Handle the validation process that required for employee data set.
+     * If validation failed, it will throw the exception.
+     */
+    public function validateNonUserDocker()
+    {
+        $request = request();
+        Log::debug('Validate -> Request Data'. print_r($request->all(), true));
+        $validator = Validator::make($request->all(),
+            [
+                'dependencyFile' => '',
+                'from' => 'required',
+                'copy' => 'required',
+                'cmd' => 'required',
+                'expose' => 'required',
+                'runDependency' => 'required',
+                'runMain' => 'required',
+                'maintainer' => 'required'
+            ]
+        );
+
+        Log::debug('validateNonUserDocker'. print_r($validator, true));
+
+        // dd($request->all());
+        if ($validator->fails()) {
+            dd($validator->errors());
+            throw new InvalidAccessException('Missing parameters');
+        }
+
+        $data = [
+            'dependencyFile' => $request->input('dependencyFile'),
+            'from' => $request->input('from'),
+            'copy' => $request->input('copy'),
+            'cmd' => $request->input('cmd'),
+            'expose' => $request->input('expose'),
+            'runDependency' => $request->input('runDependency'),
+            'runMain' => $request->input('runMain'),
+            'maintainer' => $request->input('maintainer')
         ];
 
         return $data;

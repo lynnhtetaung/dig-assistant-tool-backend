@@ -13,6 +13,7 @@ use App\Helper\Exceptions\NoDataException;
 use App\Helper\Exceptions\DataSaveFailedException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use File;
 
 /**
  * BaseHelper class for DockerFile
@@ -105,6 +106,41 @@ class BaseHelper extends HelperSingleton
 
         return $this->processor->success($result);
     }
+
+    public function createNonUserDockerFile($data) 
+    {
+        try {
+                Log::debug('Helper -> createNonUserDockerFile' . print_r($data, true));
+                // Create Dockerfile template
+                $dockerfile_template = File::get(resource_path('docker/php-dockerfile.template'));
+
+
+                Log::debug('Helper -> DockerFile Template' . print_r($dockerfile_template, true));
+
+                // Replace placeholders with user input
+                $dockerfile = str_replace(
+                    ['{{PHP_VERSION}}', '{{DBMS}}', '{{DEPENDENCIES}}', '{{ENV_VARS}}'],
+                    [ $data['cmd'],$data['expose'],$data['runDependency'],$data['runMain'] ],
+                    // $data['dependencyFile'],$data['from'],$data['copy'],
+                    $dockerfile_template
+                );
+                // Write Dockerfile to disk
+                File::put(base_path('Dockerfile'), $dockerfile);
+
+                Log::debug('Helper -> Final DockerFile' . print_r($dockerfile, true));
+
+                $result = $dockerfile;
+    
+                // return response()->download(base_path('Dockerfile'));
+            } 
+        catch (Exception $e) {
+            Log::debug('Helper -> Final DockerFile Error' . $e);
+            throw $e;
+        }
+
+        return $this->processor->success($result);
+    }
+
 
     public function updateDockerFile($appId, $data) 
     {
