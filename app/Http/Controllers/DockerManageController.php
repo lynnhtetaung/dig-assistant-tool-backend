@@ -154,6 +154,21 @@ class DockerManageController extends BaseController
     }
 
     /**
+     * Validate docker file status
+     */
+    public function validateDocker()
+    {
+        try {
+            $data = $this->validateDockerFileData();
+            $response = $this->helper->validateDockerfile($data);
+
+        } catch (Exception $e) {
+            $response = ExceptionService::getResponse($e);
+        }
+        return response()->json($response, $response['status']);
+    }
+
+    /**
      * Handle the validation process that required for employee data set.
      * If validation failed, it will throw the exception.
      */
@@ -203,12 +218,14 @@ class DockerManageController extends BaseController
             [
                 'dependencyFile' => '',
                 'from' => 'required',
-                'copy' => 'required',
-                'cmd' => 'required',
-                'expose' => 'required',
-                'runDependency' => 'required',
+                'maintainer' => 'required',
                 'runMain' => 'required',
-                'maintainer' => 'required'
+                'workdir' => 'required',
+                'copy' => 'required',
+                'runDependency' => 'required',
+                'expose' => 'required',
+                'cmd' => 'required',
+                'template' => 'required'
             ]
         );
 
@@ -223,14 +240,37 @@ class DockerManageController extends BaseController
         $data = [
             'dependencyFile' => $request->input('dependencyFile'),
             'from' => $request->input('from'),
-            'copy' => $request->input('copy'),
-            'cmd' => $request->input('cmd'),
-            'expose' => $request->input('expose'),
-            'runDependency' => $request->input('runDependency'),
+            'maintainer' => $request->input('maintainer'),
             'runMain' => $request->input('runMain'),
-            'maintainer' => $request->input('maintainer')
+            'workdir' => $request->input('workdir'),
+            'copy' => $request->input('copy'),
+            'runDependency' => $request->input('runDependency'),
+            'expose' => $request->input('expose'),
+            'cmd' => $request->input('cmd'),
+            'template' => $request->input('template')
         ];
 
         return $data;
+    }
+
+    public function validateDockerFileData() {
+
+        $request = request();
+        $validator = Validator::make($request->all(),
+        [
+            'dockerfile' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            dd($validator->errors());
+            throw new InvalidAccessException('Missing parameters');
+        }
+
+        $data = [
+            'dockerfile' => $request->input('dockerfile')
+        ];
+
+        return $data;
+
     }
 }

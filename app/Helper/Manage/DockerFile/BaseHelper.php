@@ -112,18 +112,20 @@ class BaseHelper extends HelperSingleton
         try {
                 Log::debug('Helper -> createNonUserDockerFile' . print_r($data, true));
                 // Create Dockerfile template
-                $dockerfile_template = File::get(resource_path('docker/php-dockerfile.template'));
 
-
-                Log::debug('Helper -> DockerFile Template' . print_r($dockerfile_template, true));
-
-                // Replace placeholders with user input
-                $dockerfile = str_replace(
-                    ['{{PHP_VERSION}}', '{{DBMS}}', '{{DEPENDENCIES}}', '{{ENV_VARS}}'],
-                    [ $data['cmd'],$data['expose'],$data['runDependency'],$data['runMain'] ],
-                    // $data['dependencyFile'],$data['from'],$data['copy'],
-                    $dockerfile_template
-                );
+                if($data['template'] == 'javascript') {
+                    $dockerfile_template = File::get(resource_path('docker/js-dockerfile.template'));
+                    Log::debug('Helper -> DockerFile Template' . print_r($dockerfile_template, true));
+    
+                    // Replace placeholders with user input
+                    $dockerfile = str_replace(
+                        ['{{NODE_VERSION}}', '{{MAINTAINER}}', '{{RUN_MAIN}}', '{{WORKDIR}}', '{{COPY}}', '{{RUN_DEPENDENCY}}', '{{EXPOSE}}', '{{CMD}}'],
+                        [ $data['from'], $data['maintainer'], $data['runMain'], $data['workdir'], $data['copy'], $data['runDependency'], $data['expose'], $data['cmd'] ],
+                        $dockerfile_template
+                    );
+                }
+                
+                
                 // Write Dockerfile to disk
                 File::put(base_path('Dockerfile'), $dockerfile);
 
@@ -139,6 +141,33 @@ class BaseHelper extends HelperSingleton
         }
 
         return $this->processor->success($result);
+    }
+
+    public function validateDockerfile($data)
+    {
+        try {
+            Log::debug('Helper -> validateDockerfile' . print_r($data, true));
+
+            // Run the Docker linting command
+            $process = new Process(['dockerlint', '-f', $data['dockerfile'] ]);
+            $process->run();
+
+            // Get the output of the linting command
+            $output = $process->getOutput();
+
+            $result = $output;
+
+            // Return the linting results as JSON response
+            // return response()->json(['results' => $output]);
+            Log::debug('Linter => DockerFile ' . print_r($output, true));
+
+        } 
+        catch (Exception $e) {
+            Log::debug('Helper -> Final DockerFile Error' . $e);
+            throw $e;
+    }
+
+    return $this->processor->success($result);
     }
 
 

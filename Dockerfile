@@ -1,23 +1,23 @@
 # Base image
-FROM php:['npm', 'start']-apache
+FROM ubuntu
 
-# Set working directory
-WORKDIR /var/www/html
+# Set maintainer
+MAINTAINER lynnhtetaung@s.okayama-u.ac.jp
 
 # Install database management system
-RUN apt-get update && apt-get install -y 4000
+RUN apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 
-# Install dependencies
-RUN apt-get install -y npm install
-
-# Set environment variables
-ENV apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
+# Set working directory
+WORKDIR /usr/src/app
 
 # Copy application code
-COPY . /var/www/html
+COPY . /usr/src/app
+
+# Install dependencies
+RUN npm install
 
 # Expose ports
-EXPOSE 80
+EXPOSE 4000
 
 # Start the application
-CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+CMD ['npm', 'start']
