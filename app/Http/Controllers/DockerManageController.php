@@ -30,6 +30,8 @@ class DockerManageController extends BaseController
     {
         try {
             $response = $this->helper->getDockerFiles();
+            Log::debug('Docker file all'. print_r($response, true));
+
         } catch (Exception $e) {
             $response = ExceptionService::getResponse($e);
         }

@@ -13,6 +13,7 @@ use App\Helper\Exceptions\NoDataException;
 use App\Helper\Exceptions\DataSaveFailedException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Artisan;
 use File;
 
 /**
@@ -145,21 +146,19 @@ class BaseHelper extends HelperSingleton
 
     public function validateDockerfile($data)
     {
+        // Log::debug('Docker => data ' . json_encode($data));
+
         try {
-            Log::debug('Helper -> validateDockerfile' . print_r($data, true));
 
+            // $data = resource_path('docker/nodejs.Dockerfile');
+            $path = resource_path('docker/nodejs.Dockerfile');
+            
             // Run the Docker linting command
-            $process = new Process(['dockerlint', '-f', $data['dockerfile'] ]);
-            $process->run();
+            $lintCommand = 'dockerfilelint ' . escapeshellarg($path);
+            $result = shell_exec($lintCommand);
 
-            // Get the output of the linting command
-            $output = $process->getOutput();
+            Log::debug('Linter => DockerFile ' . print_r(response()->json([ 'results' => $result['content']]), true));
 
-            $result = $output;
-
-            // Return the linting results as JSON response
-            // return response()->json(['results' => $output]);
-            Log::debug('Linter => DockerFile ' . print_r($output, true));
 
         } 
         catch (Exception $e) {
