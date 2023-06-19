@@ -24,3 +24,5 @@ Homestead.json
 .phpunit.result.cache
 /storage/logs/*.log
 /storage/framework/cache/data
+/bootstrap/cached/
+

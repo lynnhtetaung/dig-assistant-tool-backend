@@ -24,7 +24,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::lGixc7Z6qb1oEvLK',
+            '_route' => 'generated::bM2wq6QXKDX5YX9F',
           ),
           1 => NULL,
           2 => 
@@ -84,6 +84,25 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => '.docker-manage.non-user-create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/api/v1/docker-manage/validate_dockerfile' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => '.docker-manage.validate-docker-file',
           ),
           1 => NULL,
           2 => 
@@ -233,7 +252,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::lGixc7Z6qb1oEvLK' => 
+    'generated::bM2wq6QXKDX5YX9F' => 
     array (
       'methods' => 
       array (
@@ -254,7 +273,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::lGixc7Z6qb1oEvLK',
+        'as' => 'generated::bM2wq6QXKDX5YX9F',
       ),
       'fallback' => false,
       'defaults' => 
@@ -550,6 +569,43 @@ app('router')->setCompiledRoutes(
         'uses' => 'App\\Http\\Controllers\\DockerManageController@createNonUser',
         'controller' => 'App\\Http\\Controllers\\DockerManageController@createNonUser',
         'as' => '.docker-manage.non-user-create',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => '/api/v1/docker-manage',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    '.docker-manage.validate-docker-file' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'api/v1/docker-manage/validate_dockerfile',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'api',
+          1 => 'cors',
+        ),
+        'uses' => 'App\\Http\\Controllers\\DockerManageController@validateDocker',
+        'controller' => 'App\\Http\\Controllers\\DockerManageController@validateDocker',
+        'as' => '.docker-manage.validate-docker-file',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => '/api/v1/docker-manage',
         'where' => 
