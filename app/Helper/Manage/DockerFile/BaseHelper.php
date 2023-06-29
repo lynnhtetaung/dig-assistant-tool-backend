@@ -28,7 +28,9 @@ class BaseHelper extends HelperSingleton
     {
         try {
             $result = Application::getAllActive();
+            Log::debug('Helper -> getDockerFiles ' . print_r($result, true));
             if($result->isEmpty()) {
+                Log::debug('Helper -> Empty Docker file ' . print_r($result, true));
                 throw new NoDataException('Empty docker files');
             }
         } catch (Exception $e) {
@@ -116,7 +118,7 @@ class BaseHelper extends HelperSingleton
 
                 if($data['template'] == 'javascript') {
                     $dockerfile_template = File::get(resource_path('docker/js-dockerfile.template'));
-                    Log::debug('Helper -> DockerFile Template' . print_r($dockerfile_template, true));
+                    Log::debug('Helper -> Js DockerFile Template' . print_r($dockerfile_template, true));
     
                     // Replace placeholders with user input
                     $dockerfile = str_replace(
@@ -125,8 +127,19 @@ class BaseHelper extends HelperSingleton
                         $dockerfile_template
                     );
                 }
-                
-                
+
+                else if($data['template'] == 'python') {
+                    $dockerfile_template = File::get(resource_path('docker/python-dockerfile.template'));
+                    Log::debug('Helper -> Python DockerFile Template' . print_r($dockerfile_template, true));
+    
+                    // Replace placeholders with user input
+                    $dockerfile = str_replace(
+                        ['{{PYTHON_VERSION}}', '{{WORKDIR}}', '{{COPY_DEPENDENCY}}', '{{RUN_DEPENDENCY}}', '{{COPY}}', '{{CMD}}'],
+                        [ $data['from'], $data['workdir'], $data['copyDependency'], $data['runDependency'], $data['copy'], $data['cmd'] ],
+                        $dockerfile_template
+                    );
+                }
+
                 // Write Dockerfile to disk
                 File::put(base_path('Dockerfile'), $dockerfile);
 
@@ -154,10 +167,13 @@ class BaseHelper extends HelperSingleton
             $path = resource_path('docker/nodejs.Dockerfile');
             
             // Run the Docker linting command
-            $lintCommand = 'dockerfilelint ' . escapeshellarg($path);
+            $lintCommand = '/home/laradock/.nvm/versions/node/v20.1.0/bin/dockerfilelint ' . escapeshellarg($path);
             $result = shell_exec($lintCommand);
 
-            Log::debug('Linter => DockerFile ' . print_r(response()->json([ 'results' => $result['content']]), true));
+            Log::debug('Linter => DockerFile ' . print_r(response()->json([ 'results' => $result ]), true));
+
+            // $process = new Process(['rm', '/var/www/html/test.html']);
+            // $process->run();
 
 
         } 

@@ -30,10 +30,11 @@ class DockerManageController extends BaseController
     {
         try {
             $response = $this->helper->getDockerFiles();
-            Log::debug('Docker file all'. print_r($response, true));
+            Log::debug('Docker file all >>> Result'. print_r($response, true));
 
         } catch (Exception $e) {
             $response = ExceptionService::getResponse($e);
+            Log::debug('Docker file all >>> Error'. print_r($response, true));
         }
         return response()->json($response, $response['status']);
     }
@@ -220,12 +221,13 @@ class DockerManageController extends BaseController
             [
                 'dependencyFile' => '',
                 'from' => 'required',
-                'maintainer' => 'required',
-                'runMain' => 'required',
-                'workdir' => 'required',
-                'copy' => 'required',
-                'runDependency' => 'required',
-                'expose' => 'required',
+                'maintainer' => '',
+                'runMain' => '',
+                'workdir' => '',
+                'copy' => '',
+                'copyDependency' => '',
+                'runDependency' => '',
+                'expose' => '',
                 'cmd' => 'required',
                 'template' => 'required'
             ]
@@ -246,6 +248,7 @@ class DockerManageController extends BaseController
             'runMain' => $request->input('runMain'),
             'workdir' => $request->input('workdir'),
             'copy' => $request->input('copy'),
+            'copyDependency' => $request->input('copyDependency'),
             'runDependency' => $request->input('runDependency'),
             'expose' => $request->input('expose'),
             'cmd' => $request->input('cmd'),
