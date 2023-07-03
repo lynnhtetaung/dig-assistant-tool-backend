@@ -1,0 +1,14 @@
+# Base C image
+FROM {{C_VERSION}} 
+
+# Set working directory
+WORKDIR {{WORKDIR}}
+
+# Copy the application source code
+COPY {{COPY}}
+
+# Build the C application
+RUN {{RUN_DEPENDENCY}}
+
+# Default command to run the C application
+CMD {{CMD}}

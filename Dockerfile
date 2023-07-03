@@ -1,17 +1,23 @@
-# Base Python image
-FROM python:3.9
+# Base image
+FROM ubuntu
+
+# Set maintainer
+MAINTAINER lynnhtetaung@s.okayama-u.ac.jp
+
+# Install database management system
+RUN apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy the requirements file
-COPY requirements.txt .
+# Copy application code
+COPY . /usr/src/app
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN npm install
 
-# Copy the application code
-COPY . . . .
+# Expose ports
+EXPOSE 4000
 
-# Default command to run the Python application
-CMD ["python", "app.py"] 
+# Start the application
+CMD ['npm', 'start']

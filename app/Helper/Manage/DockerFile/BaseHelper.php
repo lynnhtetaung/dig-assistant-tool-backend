@@ -140,6 +140,30 @@ class BaseHelper extends HelperSingleton
                     );
                 }
 
+                else if($data['template'] == 'java') {
+                    $dockerfile_template = File::get(resource_path('docker/java-dockerfile.template'));
+                    Log::debug('Helper -> Java DockerFile Template' . print_r($dockerfile_template, true));
+    
+                    // Replace placeholders with user input
+                    $dockerfile = str_replace(
+                        ['{{JAVA_VERSION}}', '{{WORKDIR}}', '{{COPY}}', '{{RUN_DEPENDENCY}}', '{{CMD}}'],
+                        [ $data['from'], $data['workdir'], $data['copy'], $data['runDependency'], $data['copy'], $data['cmd'] ],
+                        $dockerfile_template
+                    );
+                }
+
+                else if($data['template'] == 'c') {
+                    $dockerfile_template = File::get(resource_path('docker/c-dockerfile.template'));
+                    Log::debug('Helper -> C DockerFile Template' . print_r($dockerfile_template, true));
+    
+                    // Replace placeholders with user input
+                    $dockerfile = str_replace(
+                        ['{{C_VERSION}}', '{{WORKDIR}}', '{{COPY}}', '{{RUN_DEPENDENCY}}', '{{CMD}}'],
+                        [ $data['from'], $data['workdir'], $data['copy'], $data['runDependency'], $data['cmd'] ],
+                        $dockerfile_template
+                    );
+                }
+
                 // Write Dockerfile to disk
                 File::put(base_path('Dockerfile'), $dockerfile);
 

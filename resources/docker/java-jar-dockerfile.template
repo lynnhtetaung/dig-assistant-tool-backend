@@ -1,0 +1,11 @@
+# Base Java image
+FROM {{JAVA_VERSION}}openjdk:11
+
+# Set working directory
+WORKDIR {{WORKDIR}}/app
+
+# Copy the application JAR file
+COPY {{COPY}}app.jar .
+
+# Default command to run the Java application
+CMD {{CMD}}["java", "-jar", "app.jar"]
