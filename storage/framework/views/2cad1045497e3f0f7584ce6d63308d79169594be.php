@@ -36,4 +36,4 @@
         </div>
     </body>
 </html>
-<?php /**PATH /var/www/dig-assistant-tool-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/minimal.blade.php ENDPATH**/ ?>
+<?php /**PATH /home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/views/minimal.blade.php ENDPATH**/ ?>

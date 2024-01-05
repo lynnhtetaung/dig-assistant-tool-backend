@@ -1,4 +1,8 @@
 <?php
+ini_set('memory_limit', '256M');
+ini_set('max_execution_time', 120);
+// Other ini_set calls as needed...
+
 
 return [
 
@@ -12,6 +16,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    
 
     'name' => env('APP_NAME', 'Laravel'),
 

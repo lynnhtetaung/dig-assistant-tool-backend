@@ -24,7 +24,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::DE8GoEvKslnmF3PB',
+            '_route' => 'generated::qvRIAnqJqoGJ4mE8',
           ),
           1 => NULL,
           2 => 
@@ -252,7 +252,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::DE8GoEvKslnmF3PB' => 
+    'generated::qvRIAnqJqoGJ4mE8' => 
     array (
       'methods' => 
       array (
@@ -273,7 +273,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::DE8GoEvKslnmF3PB',
+        'as' => 'generated::qvRIAnqJqoGJ4mE8',
       ),
       'fallback' => false,
       'defaults' => 

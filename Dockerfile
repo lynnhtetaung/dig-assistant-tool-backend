@@ -1,23 +1,14 @@
-# Base image
-FROM ubuntu
-
-# Set maintainer
-MAINTAINER lynnhtetaung@s.okayama-u.ac.jp
-
-# Install database management system
-RUN apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
+# Base C image
+FROM gcc:latest 
 
 # Set working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy application code
-COPY . /usr/src/app
+# Copy the application source code
+COPY . .
 
-# Install dependencies
-RUN npm install
+# Build the C application
+RUN gcc -o my-application main.c
 
-# Expose ports
-EXPOSE 4000
-
-# Start the application
-CMD ['npm', 'start']
+# Default command to run the C application
+CMD ["./my-application"]

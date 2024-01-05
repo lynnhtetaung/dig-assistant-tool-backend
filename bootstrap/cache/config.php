@@ -4,7 +4,7 @@
     'name' => 'Laravel',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost',
+    'url' => 'http://127.0.0.1',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -193,7 +193,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/dig-assistant-tool-backend/storage/framework/cache/data',
+        'path' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -279,11 +279,31 @@
         'prefix' => '',
         'foreign_key_constraints' => true,
       ),
+      'mysql' => 
+      array (
+        'driver' => 'mysql',
+        'url' => NULL,
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'funabiki_docker_manage',
+        'username' => 'root',
+        'password' => 'root',
+        'unix_socket' => '',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => true,
+        'engine' => NULL,
+        'options' => 
+        array (
+        ),
+      ),
       'funabiki_docker_manage' => 
       array (
         'driver' => 'mysql',
         'url' => NULL,
-        'host' => 'mysql',
+        'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'funabiki_docker_manage',
         'username' => 'root',
@@ -303,7 +323,7 @@
       array (
         'driver' => 'pgsql',
         'url' => NULL,
-        'host' => 'mysql',
+        'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'funabiki_docker_manage',
         'username' => 'root',
@@ -318,7 +338,7 @@
       array (
         'driver' => 'sqlsrv',
         'url' => NULL,
-        'host' => 'mysql',
+        'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'funabiki_docker_manage',
         'username' => 'root',
@@ -363,13 +383,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/dig-assistant-tool-backend/storage/app',
+        'root' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/dig-assistant-tool-backend/storage/app/public',
-        'url' => 'http://localhost/storage',
+        'root' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/app/public',
+        'url' => 'http://127.0.0.1/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -386,7 +406,7 @@
     ),
     'links' => 
     array (
-      '/var/www/dig-assistant-tool-backend/public/storage' => '/var/www/dig-assistant-tool-backend/storage/app/public',
+      '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/public/storage' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/app/public',
     ),
   ),
   'hashing' => 
@@ -421,13 +441,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/var/www/dig-assistant-tool-backend/storage/logs/laravel.log',
+        'path' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/var/www/dig-assistant-tool-backend/storage/logs/laravel.log',
+        'path' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -478,7 +498,7 @@
       ),
       'emergency' => 
       array (
-        'path' => '/var/www/dig-assistant-tool-backend/storage/logs/laravel.log',
+        'path' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/logs/laravel.log',
       ),
     ),
   ),
@@ -544,7 +564,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/dig-assistant-tool-backend/resources/views/vendor/mail',
+        0 => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/resources/views/vendor/mail',
       ),
     ),
   ),
@@ -611,7 +631,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => 'localhost',
+      5 => '127.0.0.1',
     ),
     'guard' => 
     array (
@@ -649,7 +669,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/dig-assistant-tool-backend/storage/framework/sessions',
+    'files' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -669,9 +689,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/dig-assistant-tool-backend/resources/views',
+      0 => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/resources/views',
     ),
-    'compiled' => '/var/www/dig-assistant-tool-backend/storage/framework/views',
+    'compiled' => '/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/storage/framework/views',
   ),
   'flare' => 
   array (
