@@ -297,7 +297,7 @@ class BaseHelper extends HelperSingleton
 
     public function runScript($dfName)
     {
-        putenv('DF_NAME='.$dfName);
+        putenv('DOCKERFILE_NAME='.$dfName);
         Log::debug('Docker File Name to run script== -> ' . print_r($dfName, true));   
 
         $result = shell_exec('di-build/dockerImageBuild.sh');

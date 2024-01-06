@@ -1,40 +1,21 @@
-# #!/bin/bash
-
-# DOCKER_BINARY="docker"  # Update this path according to your system
-# DF_NAME="flask"  # Replace with your Dockerfile name
-
-# set -x #echo on
-
-# # Build the Docker image
-# variableA=$($DOCKER_BINARY build -f di-build/$DF_NAME.dockerfile . -t 24091997/dig:$DF_NAME --network=host --no-cache)
-
-# echo "$variableA"
-
-# # Log in to Docker Hub using the generated access token
-# echo "dckr_pat_zVc7VxSi8N6ZDERWHf5N8G48OxU" | $DOCKER_BINARY login --username 24091997 --password-stdin
-
-# # Push the Docker image
-$DOCKER_BINARY image push 24091997/dig:$DF_NAME
-
 #!/bin/bash
 
-DOCKER_BINARY="/usr/bin/docker"  # Update this path according to your system
-DF_NAME="your_dockerfile_name"  # Replace with your Dockerfile name
+set -euo pipefail  # Enabling stricter bash mode
 
-set -x #echo on
+DOCKER_BUILDKIT=1  # Enable BuildKit (for better build performance)
 
-# Build the Docker image
-variableA=$("$DOCKER_BINARY" build -f di-build/$DF_NAME.dockerfile . -t 24091997/dig:$DF_NAME --network=host --no-cache)
+# DOCKERFILE_NAME="angular.dockerfile"  # Specify the default Dockerfile name
 
-echo "$variableA"
+# Check if a Dockerfile name was provided as an argument
+if [ $# -eq 1 ]; then
+    DOCKERFILE_NAME="$1"  # Use the provided Dockerfile name as input
+fi
 
-# Log in to Docker Hub using the generated access token
-echo "dckr_pat_zVc7VxSi8N6ZDERWHf5N8G48OxU" | "$DOCKER_BINARY" login --username 24091997 --password-stdin
+# Building the Docker image and tagging it
+docker build -f "di-build/${DOCKERFILE_NAME}.dockerfile" . -t 24091997/dig:${DOCKERFILE_NAME} --network=host --no-cache
 
-# Push the Docker image
-"$DOCKER_BINARY" image push 24091997/dig:$DF_NAME
+# Logging into Docker Hub
+docker login --username 24091997 --password-stdin < myPassword.txt
 
-
-
-
-
+# Pushing the built image to the Docker repository
+docker image push 24091997/dig:${DOCKERFILE_NAME}
