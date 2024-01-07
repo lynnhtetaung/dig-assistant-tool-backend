@@ -14,6 +14,9 @@ fi
 # Building the Docker image and tagging it
 docker build -f "di-build/${DOCKERFILE_NAME}.dockerfile" . -t 24091997/dig:${DOCKERFILE_NAME} --network=host --no-cache
 
+# Save the built Docker image to a tar file
+docker save -o "/home/pc7/Documents/develop/upc-v2/upc/media/documents/${DOCKERFILE_NAME}.tar" 24091997/dig:${DOCKERFILE_NAME}
+
 # Logging into Docker Hub
 docker login --username 24091997 --password-stdin < myPassword.txt
 

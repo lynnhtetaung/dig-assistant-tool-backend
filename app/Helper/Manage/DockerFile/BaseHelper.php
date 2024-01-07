@@ -303,7 +303,12 @@ class BaseHelper extends HelperSingleton
         $result = shell_exec('di-build/dockerImageBuild.sh');
         Log::info('Script output: '.$result);
 
+        // Execute the batch script for window OS
+        // $result = shell_exec("cmd /c di-build/window-dockerImageBuild.bat $dfName");
+
         return $this->processor->success($result);
     }
 
 }
+
+
