@@ -1,5 +1,5 @@
-# Base C image
-FROM gcc:latest 
+# Base Java image
+FROM openjdk:11
 
 # Set working directory
 WORKDIR /app
@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy the application source code
 COPY . .
 
-# Build the C application
-RUN gcc -o my-application main.c
+# Build the Java application
+RUN javac Main.java
 
-# Default command to run the C application
-CMD ["./my-application"]
+# Default command to run the Java application
+CMD . .

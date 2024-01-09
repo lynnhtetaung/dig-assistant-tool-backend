@@ -34,4 +34,5 @@ Route::group([
     Route::get('/shell-script/{name}', 'DockerManageController@run')->name('.shell-script');
     Route::post('/non-user/create', 'DockerManageController@createNonUser')->name('.non-user-create');
     Route::post('/validate_dockerfile', 'DockerManageController@validateDocker')->name('.validate-docker-file');
+    Route::post('/upload_dependecy_file', 'DockerManageController@uploadDependencyFile')->name('.dependency-file');
 });

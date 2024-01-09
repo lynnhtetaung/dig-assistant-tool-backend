@@ -52,6 +52,29 @@ class DockerManageController extends BaseController
         return response()->json($response, $response['status']);
     }
 
+    
+
+    /**
+     * uploadDependencyFile
+     */
+    public function uploadDependencyFile(Request $request)
+    {
+
+          // Get the dependency_file from the request
+          if ($request->hasFile('dependency_file')) {
+            $file = $request->file('dependency_file');
+            // Move the uploaded file to a desired directory
+            $file->move('di-build', $file->getClientOriginalName());
+
+            // Optionally, log information about the uploaded file
+            Log::info('Uploaded File: ' . $file->getClientOriginalName());
+
+            return response()->json(['message' => 'File uploaded successfully']);
+        }
+
+        return response()->json(['message' => 'No file uploaded'], 400);
+    }
+
     /**
      * Create
      */

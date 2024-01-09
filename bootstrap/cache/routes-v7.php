@@ -24,7 +24,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::hck5mTfjR32EGwwF',
+            '_route' => 'generated::5hyLOB6q3LUcx3G9',
           ),
           1 => NULL,
           2 => 
@@ -103,6 +103,25 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => '.docker-manage.validate-docker-file',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/api/v1/docker-manage/upload_dependecy_file' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => '.docker-manage.dependency-file',
           ),
           1 => NULL,
           2 => 
@@ -252,7 +271,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::hck5mTfjR32EGwwF' => 
+    'generated::5hyLOB6q3LUcx3G9' => 
     array (
       'methods' => 
       array (
@@ -273,7 +292,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::hck5mTfjR32EGwwF',
+        'as' => 'generated::5hyLOB6q3LUcx3G9',
       ),
       'fallback' => false,
       'defaults' => 
@@ -606,6 +625,43 @@ app('router')->setCompiledRoutes(
         'uses' => 'App\\Http\\Controllers\\DockerManageController@validateDocker',
         'controller' => 'App\\Http\\Controllers\\DockerManageController@validateDocker',
         'as' => '.docker-manage.validate-docker-file',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => '/api/v1/docker-manage',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    '.docker-manage.dependency-file' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'api/v1/docker-manage/upload_dependecy_file',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'api',
+          1 => 'cors',
+        ),
+        'uses' => 'App\\Http\\Controllers\\DockerManageController@uploadDependencyFile',
+        'controller' => 'App\\Http\\Controllers\\DockerManageController@uploadDependencyFile',
+        'as' => '.docker-manage.dependency-file',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => '/api/v1/docker-manage',
         'where' => 
