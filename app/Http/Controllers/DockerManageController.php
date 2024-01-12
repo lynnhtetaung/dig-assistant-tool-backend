@@ -156,10 +156,10 @@ class DockerManageController extends BaseController
     /**
      * RunScript
      */
-    public function run()
+    public function run($name)
     {
         try {
-            $response = $this->helper->runScript();
+            $response = $this->helper->runScript($name);
         } catch (Exception $e) {
             $response = ExceptionService::getResponse($e);
         }

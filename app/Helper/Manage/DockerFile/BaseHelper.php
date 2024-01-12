@@ -300,7 +300,7 @@ class BaseHelper extends HelperSingleton
         putenv('DOCKERFILE_NAME='.$dfName);
         Log::debug('Docker File Name to run script== -> ' . print_r($dfName, true));   
 
-        $result = shell_exec('di-build/dockerImageBuild.sh');
+        $result = shell_exec('/home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/public/di-build/dockerImageBuild.sh 2>&1');
         Log::info('Script output: '.$result);
 
         // Execute the batch script for window OS
