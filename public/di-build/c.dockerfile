@@ -2,13 +2,13 @@
 FROM gcc:latest 
 
 # Set working directory
-# WORKDIR /app
+WORKDIR /app
 
 # Copy the application source code
-# COPY . .
+COPY . .
 
 # Build the C application
-# RUN gcc -o my-application main.c
+RUN gcc -o my-application main.c
 
 # Default command to run the C application
-# CMD ["./my-application"]
+CMD ["./my-application"]

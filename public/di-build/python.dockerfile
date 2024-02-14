@@ -1,16 +1,17 @@
-FROM node:16
+# Base Python image
+FROM python:3.9
 
-# Create app directory
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-#COPY /home/pc7/Documents/develop/dig-tool/dig-assistant-tool-backend/public/di-build/package.json ./
+# Copy the requirements file
+COPY requirements.txt .
 
-# RUN npm install
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Bundle app source
+# Copy the application code
 COPY . .
 
-EXPOSE 4200
+# Default command to run the Python application
+CMD ["python", "app.py"] 

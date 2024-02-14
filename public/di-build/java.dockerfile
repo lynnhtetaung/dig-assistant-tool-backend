@@ -1,7 +1,14 @@
-FROM ubuntu:16.04
-MAINTAINER Java <clh960524@gmail.com>
-ENV TEMP_MRCNN_DIR /tmp/mrcnn
-EXPOSE 4404
-RUN mkdir java
-WORKDIR /root
-CMD ['/bin/bash']
+# Base Java image
+FROM openjdk:11
+
+# Set working directory
+WORKDIR /app
+
+# Copy the application source code
+COPY . .
+
+# Build the Java application
+RUN javac Main.java
+
+# Default command to run the Java application
+CMD . .

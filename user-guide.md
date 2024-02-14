@@ -11,6 +11,7 @@ Frontend - save the generated Docker file in di-build file system (should be res
          - add name as request parameter to call the script API .
 Backend  - run the function manually in Tinker (for docker image generation process)
          - window-dockerImageBuild.bat for window OS, bash build_image.sh for linux/MacOs
+         - php artisan serve --port=8080
 
 
 
